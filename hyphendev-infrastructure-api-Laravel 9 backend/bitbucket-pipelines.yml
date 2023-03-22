@@ -1,0 +1,34 @@
+image:
+  name: 646228977618.dkr.ecr.us-east-1.amazonaws.com/testing-image
+  aws:
+    access-key: $DR_AWS_KEY
+    secret-key: $DR_AWS_SECRET
+pipelines:
+  default:
+    - step:
+        caches:
+          - composer
+        script:
+          - rm -rf /var/www
+          - ln -s /opt/atlassian/pipelines/agent/build /var/www
+          - ln -f -s .env.pipelines .env
+          - ln -f -s .env.pipelines .env.testing
+          - composer install --no-interaction --no-progress --prefer-dist
+          - composer dump-autoload
+          - php artisan migrate --env=pipelines --seed
+          - vendor/bin/php-cs-fixer fix -v --dry-run --stop-on-violation --using-cache=no
+          - php artisan test --parallel --env=pipelines --recreate-databases
+        services:
+          - mysql
+  branches:
+    master:
+      - step:
+          script:
+            - echo "We do nothing here now"
+definitions:
+  services:
+    mysql:
+      image: mysql:8.0
+      variables:
+        MYSQL_DATABASE: 'infrastructure'
+        MYSQL_ROOT_PASSWORD: 'randompassword'
