@@ -1,0 +1,24 @@
+{
+  "name": "app-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "axios": "^0.27.2",
+    "pinia": "^2.0.20",
+    "qs": "^6.11.0",
+    "vue": "^3.2.37",
+    "vue-router": "4",
+    "vuetify": "^3.0.0-beta.9"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "vite": "^3.0.7"
+  }
+}

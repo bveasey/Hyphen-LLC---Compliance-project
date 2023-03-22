@@ -1,0 +1,17 @@
+.hackbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1005;
+}
+
+.hackbar .v-snackbar {
+    position: static !important;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+}
+
+.hackbar .v-snackbar .v-overlay__content {
+    position: static !important;
+}
